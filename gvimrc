@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 22-Apr-2015.
+" Last Change: 23-Apr-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -198,6 +198,8 @@ nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
 nnoremap [Q :<C-u>cfirst<CR> " 最初へ
 nnoremap ]Q :<C-u>clast<CR>  " 最後へ
+
+" vimrc編集
 nnoremap ,vim :vsplit<cr><C-w>l:e! C:\Users\takayuki.mori\vim74-kaoriya-win32\gvimrc<cr> " gvimrcを開く
 nnoremap ,vr :source C:\Users\takayuki.mori\vim74-kaoriya-win32\gvimrc<cr>
 
