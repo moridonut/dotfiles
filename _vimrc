@@ -10,6 +10,7 @@ set backspace=2		" more powerful backspacing
 syntax on  " highlight syntax
 
 color hybrid
+colorscheme hybrid
 "---------------------------------------------------------------------------
 " Invisible Characters
 set list
