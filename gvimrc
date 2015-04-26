@@ -205,7 +205,7 @@ nnoremap ,vr :source C:\Users\takayuki.mori\vim74-kaoriya-win32\gvimrc<cr>
 
 "---------------------------------------------------------------------------
 " コマンドエイリアス
-command Nt tabnew
+" command Nt tabnew
 
 
 "---------------------------------------------------------------------------
