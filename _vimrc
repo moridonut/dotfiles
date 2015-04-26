@@ -60,7 +60,18 @@ call neobundle#end()
 " NeoBundle で管理するプラグインを追加します。
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/unite.vim.git'
- 
+" originalrepos on github
+NeoBundle 'Shougo/neobundle.vim'
+" NeoBundle 'Shougo/vimproc'
+NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'scrooloose/syntastic' 
+NeoBundle 'scrooloose/nerdtree' 
 filetype plugin indent on       " restore filetype
 
 
@@ -68,8 +79,14 @@ filetype plugin indent on       " restore filetype
 " Key assignment
 nnoremap <C-o> o<Esc>
 
-
-
+nnoremap ,tr :NERDTree<CR>
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
+nnoremap ,vr :source ~/.vimrc<cr>
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 "---------------------------------------------------------------------------
 " コマンドエイリアス
 command Nt tabnew
