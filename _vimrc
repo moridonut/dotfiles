@@ -92,13 +92,5 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 command Nt tabnew
 
 
-"---------------------------------------------------------------------------
-" Github and vundle
-set nocompatible
-filetype off
-
-set rtp+=~/dotfiles/vimfiles/vundle.git/        "#vundleのディレクトリ
-call vundle#rc()
-filetype plugin indent on     " required!
 
 
