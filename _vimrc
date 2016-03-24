@@ -194,3 +194,32 @@ function! s:GetHighlight(hi)
   return hl
 endfunction
 """"""""""""""""""""""""""""""
+<<<<<<< HEAD
+=======
+
+
+
+"---------------------------------------------------------------------------
+" Key assignment
+nnoremap <C-o> o<Esc>
+
+nnoremap ,tr :NERDTree<CR>
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
+nnoremap ,vr :source ~/.vimrc<cr>
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+" Rubyを実行
+nnoremap <C-e> :!ruby %
+
+
+"---------------------------------------------------------------------------
+" コマンドエイリアス
+command Nt tabnew
+
+
+
+
+>>>>>>> efd33af5c9745d979a3186abfd857d625057ebf3
