@@ -193,11 +193,6 @@ function! s:GetHighlight(hi)
   let hl = substitute(hl, 'xxx', '', '')
   return hl
 endfunction
-""""""""""""""""""""""""""""""
-<<<<<<< HEAD
-=======
-
-
 
 "---------------------------------------------------------------------------
 " Key assignment
@@ -215,11 +210,4 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <C-e> :!ruby %
 
 
-"---------------------------------------------------------------------------
-" コマンドエイリアス
-command Nt tabnew
 
-
-
-
->>>>>>> efd33af5c9745d979a3186abfd857d625057ebf3
