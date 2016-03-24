@@ -44,9 +44,6 @@ set textwidth=0
 " textwidthでフォーマットさせたくない
 set formatoptions=q
 
-" :vimgrepで自動にquickfix-windowを開く
-autocmd QuickFixCmdPost *grep* cwindow
-
 "---------------------------------------------------------------------------
 " Neobundle用設定
 set nocompatible
@@ -87,79 +84,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on       " restore filetype
 
-
-"---------------------------------------------------------------------------
-" Key assignment
-nnoremap <C-o> o<Esc>
-
-nnoremap ,tr :NERDTree<CR>
-nnoremap ,vim :vsplit<cr><C-w>l:e! C:\Users\B027893\_vimrc<cr> " vimrcを開く
-nnoremap ,vr :source ~/_vimrc<cr>
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-nnoremap ; :
-
-" ===Window changes from http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca ===
-" Window size changes
-nnoremap s <Nop>
-
-" Active window changes
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-" Window place swap
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-nnoremap sn gt
-nnoremap sp gT
-nnoremap sr <C-w>r  "Rotate
-
-" Window size changes
-nnoremap s= <C-w>=	"To the same size
-nnoremap sw <C-w>w
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
-nnoremap sN :<C-u>bn<CR>
-nnoremap sP :<C-u>bp<CR>
-nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
-nnoremap sQ :<C-u>bd<CR>
-nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
-
-" To check later.
-" call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-" call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-" call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-" call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-" call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-" call submode#map('bufmove', 'n', '', '<', '<C-w><')
-" call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-" call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-"---------------------------------------------------------------------------
-" コマンドエイリアス
-" command Nt tabnew
-
-
-"---------------------------------------------------------------------------
-" Github and vundle
-set nocompatible
-filetype off
-
-set rtp+=~/dotfiles/vimfiles/vundle.git/        "#vundleのディレクトリ
-" call vundle#rc()
-filetype plugin indent on     " required!
-
-
 " https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
 """"""""""""""""""""""""""""""
 " 挿入モード時、ステータスラインの色を変更
@@ -194,3 +118,25 @@ function! s:GetHighlight(hi)
   return hl
 endfunction
 """"""""""""""""""""""""""""""
+
+
+
+"---------------------------------------------------------------------------
+" Key assignment
+nnoremap <C-o> o<Esc>
+
+nnoremap ,tr :NERDTree<CR>
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
+nnoremap ,vr :source ~/.vimrc<cr>
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+"---------------------------------------------------------------------------
+" コマンドエイリアス
+command Nt tabnew
+
+
+
+
