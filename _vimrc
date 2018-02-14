@@ -1,5 +1,5 @@
 " Configuration file for vim
-"ctest
+" test
 set modelines=0		" CVE-2007-2438
 
 " Normally we use vim-extensions. If you want true vi-compatibility
@@ -13,9 +13,9 @@ syntax on  " highlight syntax
 color hybrid
 colorscheme hybrid
 
-" スワップファイルなどの出力先
-:set directory=~\Documents\vimfiles\tmp
-:set backupdir=~\Documents\vimfiles\tmp
+" Swap file directory
+:set directory=~/Documents/vimfiles/tmp
+:set backupdir=~/Documents/vimfiles/tmp
 
 "---------------------------------------------------------------------------
 " Invisible Characters
@@ -23,38 +23,28 @@ set list
 set listchars=tab:>-,eol:$
 
 "---------------------------------------------------------------------------
-" その他、見栄えに関する設定:
+" Other appearance settings
 "
-" 検索文字列をハイライトしない(_vimrcではなく_gvimrcで設定する必要がある)
-"set nohlsearch
-set showtabline=2 " タブ化
-" 行番号を表示
-set number
-" 現在の行をハイライト
-set cursorline
+set hlsearch "Highlight search result
+set showtabline=2 " Show tabs
+set number "Show line number
+set cursorline "Highlight current row
 "---------------------------------------------------------------------------
 
-" タブを表示するときの幅
-set tabstop=4
-" タブを挿入するときの幅
-set shiftwidth=4
-" タブをタブとして扱う(スペースに展開しない)
-set noexpandtab
+set tabstop=4 "tab width
+set shiftwidth=4 "tab width
+set noexpandtab "Treat tabs as tabs (i.e. do not replace with spaces)
 " 
 set softtabstop=0
 
-" 自動改行しない
-set textwidth=0
-
-" textwidthでフォーマットさせたくない
+set textwidth=0 "No auto return
 set formatoptions=q
 
-" :vimgrepで自動にquickfix-windowを開く
+" :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
 
 "---------------------------------------------------------------------------
-" Neobundle用設定
-set nocompatible
+" Neobundle settings
 filetype off            " for NeoBundle
  
 if has('vim_starting')
@@ -66,9 +56,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
  
-" ここから NeoBundle でプラグインを設定します
+" ===== Neobundle plugins =====
  
-" NeoBundle で管理するプラグインを追加します。
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/unite.vim.git'
 " originalrepos on github
@@ -84,19 +73,19 @@ NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic' 
 NeoBundle 'scrooloose/nerdtree' 
 NeoBundle 'tpope/vim-endwise'
-" 勝手にendを入れてくれる
+" Auto end
 NeoBundle 'tomtom/tcomment_vim'
-" インデントに色を付けて見やすくする
+" Colored indent
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
 call neobundle#end()
 
-" " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+" " Run vim-indent-guides when starting vim
 let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on       " restore filetype
 
-" これを入れると未インストールのプラグインがある場合に質問してくれる
+" Check if any uninstalled NeoBundles
 " NeoBundleCheck
 
 
@@ -104,22 +93,27 @@ filetype plugin indent on       " restore filetype
 
 "---------------------------------------------------------------------------
 " Key assignment
-" nnoremap ; :
-" nnoremap ,xml :%s/></>\r</g<CR>ggVG=<CR>"Reform XML
+
+" .vimrc settings
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " Open VIMRC
+nnoremap ,vr :source ~/.vimrc<cr> "Run VIMRC
+
+" Color and Formatting changes
 nnoremap ,xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>"Reform XML
 nnoremap ,sql :set filetype=sql<CR> "Assign SQL format
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return> "Stop search highlighting
+
 nnoremap <C-o> o<Esc>
 
 nnoremap ,tr :NERDTree<CR>
-nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
-nnoremap ,vr :source ~/.vimrc<cr>
+
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-" Rubyを実行
-nnoremap <C-e> :!ruby %
+
+nnoremap <C-e> :!ruby % "Run ruby
 
 
 " ===Window changes from http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca ===
@@ -169,9 +163,7 @@ nnoremap s "_s
 " call submode#map('bufmove', 'n', '', '<', '<C-w><')
 " call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 " call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-"---------------------------------------------------------------------------
-" コマンドエイリアス
-" command Nt tabnew
+
 
 
 "---------------------------------------------------------------------------
@@ -179,14 +171,14 @@ nnoremap s "_s
 set nocompatible
 filetype off
 
-set rtp+=~/dotfiles/vimfiles/vundle.git/        "#vundleのディレクトリ
+set rtp+=~/dotfiles/vimfiles/vundle.git/        "#vundle directory
 " call vundle#rc()
 filetype plugin indent on     " required!
 
 
 " https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
 """"""""""""""""""""""""""""""
-" 挿入モード時、ステータスラインの色を変更
+" Change status bar color when insert mode
 """"""""""""""""""""""""""""""
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
