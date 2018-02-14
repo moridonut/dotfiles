@@ -1,5 +1,5 @@
 " Configuration file for vim
-" test
+"ctest
 set modelines=0		" CVE-2007-2438
 
 " Normally we use vim-extensions. If you want true vi-compatibility
@@ -12,6 +12,11 @@ syntax on  " highlight syntax
 
 color hybrid
 colorscheme hybrid
+
+" スワップファイルなどの出力先
+:set directory=~\Documents\vimfiles\tmp
+:set backupdir=~\Documents\vimfiles\tmp
+
 "---------------------------------------------------------------------------
 " Invisible Characters
 set list
@@ -55,9 +60,11 @@ filetype off            " for NeoBundle
 if has('vim_starting')
         set rtp+=$HOME/.vim/bundle/neobundle.vim/
 endif
+
 call neobundle#begin(expand('~/.vim/bundle'))
+
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
+
  
 " ここから NeoBundle でプラグインを設定します
  
@@ -81,30 +88,43 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tomtom/tcomment_vim'
 " インデントに色を付けて見やすくする
 NeoBundle 'nathanaelkane/vim-indent-guides'
-"
+
+call neobundle#end()
+
 " " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on       " restore filetype
 
+" これを入れると未インストールのプラグインがある場合に質問してくれる
+" NeoBundleCheck
+
+
+
 
 "---------------------------------------------------------------------------
 " Key assignment
+" nnoremap ; :
+" nnoremap ,xml :%s/></>\r</g<CR>ggVG=<CR>"Reform XML
+nnoremap ,xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>"Reform XML
+nnoremap ,sql :set filetype=sql<CR> "Assign SQL format
 nnoremap <C-o> o<Esc>
 
 nnoremap ,tr :NERDTree<CR>
-nnoremap ,vim :vsplit<cr><C-w>l:e! C:\Users\B027893\_vimrc<cr> " vimrcを開く
-nnoremap ,vr :source ~/_vimrc<cr>
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
+nnoremap ,vr :source ~/.vimrc<cr>
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-nnoremap ; :
+" Rubyを実行
+nnoremap <C-e> :!ruby %
+
 
 " ===Window changes from http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca ===
 " Window size changes
-nnoremap s <Nop>
+" nnoremap s <Nop>
 
 " Active window changes
 nnoremap sj <C-w>j
@@ -124,7 +144,7 @@ nnoremap sr <C-w>r  "Rotate
 nnoremap s= <C-w>=	"To the same size
 nnoremap sw <C-w>w
 nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
+nnoremap sO <C-w>
 nnoremap sN :<C-u>bn<CR>
 nnoremap sP :<C-u>bp<CR>
 nnoremap st :<C-u>tabnew<CR>
@@ -135,6 +155,10 @@ nnoremap sq :<C-u>q<CR>
 nnoremap sQ :<C-u>bd<CR>
 nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
 nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
+
+" Destroy x and s delete register
+nnoremap x "_x
+nnoremap s "_s
 
 " To check later.
 " call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
@@ -193,21 +217,4 @@ function! s:GetHighlight(hi)
   let hl = substitute(hl, 'xxx', '', '')
   return hl
 endfunction
-
-"---------------------------------------------------------------------------
-" Key assignment
-nnoremap <C-o> o<Esc>
-
-nnoremap ,tr :NERDTree<CR>
-nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " vimrcを開く
-nnoremap ,vr :source ~/.vimrc<cr>
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-" Rubyを実行
-nnoremap <C-e> :!ruby %
-
-
 
