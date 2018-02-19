@@ -92,23 +92,33 @@ filetype plugin indent on       " restore filetype
 
 
 "---------------------------------------------------------------------------
+"---------------------------------------------------------------------------
 " Key assignment
 
 " .vimrc settings
-nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> " Open VIMRC
-nnoremap ,vr :source ~/.vimrc<cr> "Run VIMRC
+nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> 
+nnoremap ,vr :source ~/.vimrc<cr>
 
+"---------------------------------------------------------------------------
 " Color and Formatting changes
-nnoremap ,xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>"Reform XML
-nnoremap ,sql :set filetype=sql<CR> "Assign SQL format
-nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return> "Stop search highlighting
 
+" Reform XML
+nnoremap ,xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>
+nnoremap ,sql :set filetype=sql<CR>
+" Stop highlight search result
+" nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+nnoremap <Esc><Esc> :noh<CR>
+
+"---------------------------------------------------------------------------
 nnoremap <C-o> o<Esc>
 
+"---------------------------------------------------------------------------
+" Plugins
 nnoremap ,tr :NERDTree<CR>
 
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,ud :<C-u>Unite file<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
@@ -153,6 +163,9 @@ nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 " Destroy x and s delete register
 nnoremap x "_x
 nnoremap s "_s
+
+" Re-yank after visual mode paste
+xnoremap <expr> p 'pgv"'.v:register.'y`>'
 
 " To check later.
 " call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
