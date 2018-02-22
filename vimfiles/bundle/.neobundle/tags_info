@@ -1,0 +1,13 @@
+VimClojure
+neobundle.vim
+neocomplcache
+neosnippet
+neosnippet-snippets
+nerdtree
+syntastic
+tcomment_vim
+unite.vim
+vim-endwise
+vim-indent-guides
+vim-slime
+vimshell
