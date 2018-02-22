@@ -10,6 +10,7 @@ set backspace=2		" more powerful backspacing
 " Preference for editor screen
 syntax on  " highlight syntax
 
+set t_Co=256
 color hybrid
 colorscheme hybrid
 
@@ -39,6 +40,7 @@ set softtabstop=0
 
 set textwidth=0 "No auto return
 set formatoptions=q
+set fileformats=unix,dos,mac
 
 " :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
@@ -112,6 +114,9 @@ nnoremap <Esc><Esc> :noh<CR>
 "---------------------------------------------------------------------------
 nnoremap <C-o> o<Esc>
 
+" Change CRLF to LF
+nnoremap <silent> ,lf :e<space>++ff=unix<CR>:%s/<C-v><C-m>//g<CR>
+
 "---------------------------------------------------------------------------
 " Plugins
 nnoremap ,tr :NERDTree<CR>
@@ -135,6 +140,7 @@ nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
+" -----
 " Window place swap
 nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
@@ -142,10 +148,13 @@ nnoremap sL <C-w>L
 nnoremap sH <C-w>H
 nnoremap sn gt
 nnoremap sp gT
-nnoremap sr <C-w>r  "Rotate
+" rotate
+nnoremap sr <C-w>r
 
+" -----
 " Window size changes
-nnoremap s= <C-w>=	"To the same size
+" to the same size
+nnoremap s= <C-w>=
 nnoremap sw <C-w>w
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>
@@ -162,7 +171,9 @@ nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 
 " Destroy x and s delete register
 nnoremap x "_x
+xnoremap x "_x
 nnoremap s "_s
+xnoremap s "_s
 
 " Re-yank after visual mode paste
 xnoremap <expr> p 'pgv"'.v:register.'y`>'
