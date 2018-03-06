@@ -131,7 +131,7 @@ nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 
-nnoremap <C-e> :!ruby % "Run ruby
+" nnoremap <C-e> :!ruby % "Run ruby
 
 
 " ===Window changes from http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca ===
