@@ -18,6 +18,9 @@ colorscheme hybrid
 :set directory=~/Documents/vimfiles/tmp
 :set backupdir=~/Documents/vimfiles/tmp
 
+" Change current directory per the current buffer file.
+set autochdir
+
 "---------------------------------------------------------------------------
 " Invisible Characters
 set list
