@@ -48,6 +48,7 @@ set fileformats=unix,dos,mac
 " :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
 
+
 "---------------------------------------------------------------------------
 " Neobundle settings
 filetype off            " for NeoBundle
@@ -178,9 +179,18 @@ xnoremap x "_x
 nnoremap s "_s
 xnoremap s "_s
 
+" Quickly move in Quickfix
+nnoremap q[ :cprevious<CR>
+nnoremap q] :cnext<CR>
+nnoremap Q[ :<C-u>cfirst<CR>
+nnoremap Q] :<C-u>clast<CR>
+
 " Re-yank after visual mode paste
 xnoremap <expr> p 'pgv"'.v:register.'y`>'
 
+" Pick word on cursor for replacement
+nnoremap <expr> c* ':%s /\<' . expand('<cword>') . '\>/'
+vnoremap <expr> c* ':s /\<' . expand('<cword>') . '\>/'
 " To check later.
 " call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
 " call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
