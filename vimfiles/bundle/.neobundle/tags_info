@@ -1,6 +1,8 @@
-VimClojure
+lightline.vim
+molokai
 neobundle.vim
 neocomplcache
+neocomplete.vim
 neosnippet
 neosnippet-snippets
 nerdtree
@@ -9,5 +11,4 @@ tcomment_vim
 unite.vim
 vim-endwise
 vim-indent-guides
-vim-slime
-vimshell
+vim-over

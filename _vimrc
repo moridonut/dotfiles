@@ -33,7 +33,8 @@ set hlsearch "Highlight search result
 set showtabline=2 " Show tabs
 set number "Show line number
 set cursorline "Highlight current row
-"---------------------------------------------------------------------------
+set wildmenu "Snippet when pressing tab on command
+set history=500 "Number of history to save
 
 set tabstop=4 "tab width
 set shiftwidth=4 "tab width
@@ -44,6 +45,13 @@ set softtabstop=0
 set textwidth=0 "No auto return
 set formatoptions=q
 set fileformats=unix,dos,mac
+
+" Status lines
+set laststatus=2 "Always show status line
+set showmode " Show the current mode
+set showcmd " Show the command executed
+set ruler " Show ruler on the bottom right
+
 
 " :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
@@ -64,18 +72,14 @@ NeoBundleFetch 'Shougo/neobundle.vim'
  
 " ===== Neobundle plugins =====
  
-NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/unite.vim.git'
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 " NeoBundle 'Shougo/vimproc'
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete.vim' " Further setting is on the buttom
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic' 
 NeoBundle 'scrooloose/nerdtree' 
 NeoBundle 'tpope/vim-endwise'
@@ -83,11 +87,20 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tomtom/tcomment_vim'
 " Colored indent
 NeoBundle 'nathanaelkane/vim-indent-guides'
+" Run vim-indent-guides when starting vim
+let g:indent_guides_enable_on_vim_startup = 1
+
+" Highlight replacing words
+NeoBundle 'osyo-manga/vim-over'
+
+" Hyper status line
+NeoBundle 'itchyny/lightline.vim'
+
+" Colorscheme
+NeoBundle 'tomasr/molokai'
 
 call neobundle#end()
 
-" " Run vim-indent-guides when starting vim
-let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on       " restore filetype
 
@@ -189,8 +202,8 @@ nnoremap Q] :<C-u>clast<CR>
 xnoremap <expr> p 'pgv"'.v:register.'y`>'
 
 " Pick word on cursor for replacement
-nnoremap <expr> c* ':%s /\<' . expand('<cword>') . '\>/'
-vnoremap <expr> c* ':s /\<' . expand('<cword>') . '\>/'
+nnoremap <expr> c* ':OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>'
+vnoremap <expr> c* ':OverCommandLine<CR>s//g<Left><Left>'
 " To check later.
 " call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
 " call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
@@ -215,35 +228,80 @@ filetype plugin indent on     " required!
 
 " https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
 """"""""""""""""""""""""""""""
-" Change status bar color when insert mode
-""""""""""""""""""""""""""""""
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
+
+"----------------------------------------------------------
+" neocompleteEneosnippet settings
+"----------------------------------------------------------
+if neobundle#is_installed('neocomplete.vim')
+	"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+	" Disable AutoComplPop.
+	let g:acp_enableAtStartup = 0
+	" Use neocomplete.
+	let g:neocomplete#enable_at_startup = 1
+	" Use smartcase.
+	let g:neocomplete#enable_smart_case = 1
+	" Set minimum syntax keyword length.
+	let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+	" Define dictionary.
+	let g:neocomplete#sources#dictionary#dictionaries = {
+		\ 'default' : '',
+		\ 'vimshell' : $HOME.'/.vimshell_hist',
+		\ 'scheme' : $HOME.'/.gosh_completions'
+			\ }
+
+	" Define keyword.
+	if !exists('g:neocomplete#keyword_patterns')
+		let g:neocomplete#keyword_patterns = {}
+	endif
+	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+	" Plugin key-mappings.
+	inoremap <expr><C-g>     neocomplete#undo_completion()
+	inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+	" Recommended key-mappings.
+	" <CR>: close popup and save indent.
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function()
+	  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+	  " For no inserting <CR> key.
+	  "return pumvisible() ? "\<C-y>" : "\<CR>"
+	endfunction
+	" <TAB>: completion.
+	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+	" <C-h>, <BS>: close popup and delete backword char.
+	inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+	" Close popup by <Space>.
+	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+	" AutoComplPop like behavior.
+	"let g:neocomplete#enable_auto_select = 1
+
+	" Shell like behavior(not recommended).
+	"set completeopt+=longest
+	"let g:neocomplete#enable_auto_select = 1
+	"let g:neocomplete#disable_auto_complete = 1
+	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+	" Enable omni completion.
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+	" Enable heavy omni completion.
+	if !exists('g:neocomplete#sources#omni#input_patterns')
+	  let g:neocomplete#sources#omni#input_patterns = {}
+	endif
+	"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+	"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+	"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+	" For perlomni.vim setting.
+	" https://github.com/c9s/perlomni.vim
+	let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
-
