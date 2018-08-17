@@ -1,1 +1,5 @@
-./vimfiles/bundle/
+# bundle directory
+./vimfiles/bundle/*
+!./vimfiles/bundle/neobundle.vim
+
+
