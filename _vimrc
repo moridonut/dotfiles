@@ -202,6 +202,7 @@ nnoremap Q] :<C-u>clast<CR>
 xnoremap <expr> p 'pgv"'.v:register.'y`>'
 
 " Pick word on cursor for replacement
+nnoremap sub :OverCommandLine<CR>%s/
 nnoremap <expr> c* ':OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>'
 vnoremap <expr> c* ':OverCommandLine<CR>s//g<Left><Left>'
 " To check later.
