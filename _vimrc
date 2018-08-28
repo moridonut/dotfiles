@@ -11,8 +11,6 @@ set backspace=2		" more powerful backspacing
 syntax on  " highlight syntax
 
 set t_Co=256
-" color hybrid
-" colorscheme hybrid
 
 " Swap file directory
 :set directory=~/Documents/vimfiles/tmp
@@ -102,8 +100,6 @@ NeoBundle 'tomasr/molokai'
 call neobundle#end()
 
 
-color molokai
-colorscheme molokai
 
 filetype plugin indent on       " restore filetype
 
@@ -309,3 +305,9 @@ if neobundle#is_installed('neocomplete.vim')
 	" https://github.com/c9s/perlomni.vim
 	let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
+
+" COLOR SCHEME
+
+color molokai
+colorscheme molokai
+
