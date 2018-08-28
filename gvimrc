@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 26-Apr-2015.
+" Last Change: 28-Aug-2018.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -63,7 +63,8 @@ endif
 
 "---------------------------------------------------------------------------
 " カラー設定:
-colorscheme hybrid
+" vimrcで設定済み
+" colorscheme hybrid
 
 "---------------------------------------------------------------------------
 " フォント設定:
@@ -94,8 +95,6 @@ set columns=100
 set lines=34
 " コマンドラインの高さ(GUI使用時)
 set cmdheight=2
-" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
-"colorscheme evening " (GUI使用時)
 
 "---------------------------------------------------------------------------
 " 日本語入力に関する設定:
