@@ -115,6 +115,7 @@ filetype plugin indent on       " restore filetype
 
 " .vimrc settings
 nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> 
+nnoremap ,gvim :vsplit<cr><C-w>l:e! ~/.gvimrc<cr> 
 nnoremap ,vr :source ~/.vimrc<cr>
 
 "---------------------------------------------------------------------------
