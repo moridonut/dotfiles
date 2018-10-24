@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 28-Aug-2018.
+" Last Change: 24-Oct-2018.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -89,7 +89,7 @@ endif
 " ウインドウに関する設定:
 "
 " ウインドウの幅
-set columns=100
+set columns=140
 " ウインドウの高さ
 set lines=34
 " コマンドラインの高さ(GUI使用時)
