@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 24-Oct-2018.
+" Last Change: 02-Feb-2019.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -63,7 +63,7 @@ endif
 
 "---------------------------------------------------------------------------
 " カラー設定:
- colorscheme molokai
+" colorscheme molokai
 
 "---------------------------------------------------------------------------
 " フォント設定:

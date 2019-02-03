@@ -7,6 +7,9 @@ set modelines=0		" CVE-2007-2438
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 set backspace=2		" more powerful backspacing
 
+" Run vim-indent-guides when starting vim
+let g:indent_guides_enable_on_vim_startup = 1
+
 " Preference for editor screen
 syntax on  " highlight syntax
 
@@ -54,59 +57,61 @@ set ruler " Show ruler on the bottom right
 " :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
 
-
-"---------------------------------------------------------------------------
-" Neobundle settings
-filetype off            " for NeoBundle
- 
-if has('vim_starting')
-        set rtp+=$HOME/.vim/bundle/neobundle.vim/
+" ---------------------------------------------------------
+" use dein.vim
+if &compatible
+  set nocompatible
 endif
 
-call neobundle#begin(expand('~/.vim/bundle'))
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+let s:dein_dir = $HOME . '/.vim/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:toml = s:dein_dir . '/dein.toml'
+let s:lazy_toml = s:dein_dir . '/dein_lazy.toml'
+let &rtp = &rtp .",". s:dein_repo_dir
 
- 
-" ===== Neobundle plugins =====
- 
+
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#end()
+  call dein#save_state()
+
+  if dein#check_install()
+    call dein#install()
+  endif
+endif
+
+silent! execute 'helptags' s:dein_repo_dir . '/doc/'
+"---------------------------------------------------------------------------
 " originalrepos on github
-NeoBundle 'Shougo/neobundle.vim'
 " NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplete.vim' " Further setting is on the buttom
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'scrooloose/syntastic' 
-NeoBundle 'scrooloose/nerdtree' 
-NeoBundle 'tpope/vim-endwise'
+" NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/neocomplete.vim' " Further setting is on the buttom
+" NeoBundle 'Shougo/neocomplcache'
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'scrooloose/syntastic' 
+" NeoBundle 'scrooloose/nerdtree' 
+" NeoBundle 'tpope/vim-endwise'
 " Auto end
-NeoBundle 'tomtom/tcomment_vim'
+" NeoBundle 'tomtom/tcomment_vim'
 " Colored indent
-NeoBundle 'nathanaelkane/vim-indent-guides'
+" NeoBundle 'nathanaelkane/vim-indent-guides'
 " Run vim-indent-guides when starting vim
-let g:indent_guides_enable_on_vim_startup = 1
 
 " Highlight replacing words
-NeoBundle 'osyo-manga/vim-over'
+" NeoBundle 'osyo-manga/vim-over'
 
 " Hyper status line
-NeoBundle 'itchyny/lightline.vim'
+" NeoBundle 'itchyny/lightline.vim'
 
 " Colorscheme
-NeoBundle 'tomasr/molokai'
-
-call neobundle#end()
-
-
-
-filetype plugin indent on       " restore filetype
-
-" Check if any uninstalled NeoBundles
-" NeoBundleCheck
-
-
+" NeoBundle 'tomasr/molokai'
 
 
 "---------------------------------------------------------------------------
@@ -217,98 +222,9 @@ vnoremap <expr> c* ':OverCommandLine<CR>s//g<Left><Left>'
 
 
 
-"---------------------------------------------------------------------------
-" Github and vundle
-set nocompatible
-filetype off
-
-set rtp+=~/dotfiles/vimfiles/vundle.git/        "#vundle directory
-" call vundle#rc()
-filetype plugin indent on     " required!
-
-
-" https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
-""""""""""""""""""""""""""""""
-
-
 "----------------------------------------------------------
-" neocompleteÅEneosnippet settings
-"----------------------------------------------------------
-if neobundle#is_installed('neocomplete.vim')
-	"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
-	" Use smartcase.
-	let g:neocomplete#enable_smart_case = 1
-	" Set minimum syntax keyword length.
-	let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-	" Define dictionary.
-	let g:neocomplete#sources#dictionary#dictionaries = {
-		\ 'default' : '',
-		\ 'vimshell' : $HOME.'/.vimshell_hist',
-		\ 'scheme' : $HOME.'/.gosh_completions'
-			\ }
-
-	" Define keyword.
-	if !exists('g:neocomplete#keyword_patterns')
-		let g:neocomplete#keyword_patterns = {}
-	endif
-	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-	" Plugin key-mappings.
-	inoremap <expr><C-g>     neocomplete#undo_completion()
-	inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-	" Recommended key-mappings.
-	" <CR>: close popup and save indent.
-	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	function! s:my_cr_function()
-	  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-	  " For no inserting <CR> key.
-	  "return pumvisible() ? "\<C-y>" : "\<CR>"
-	endfunction
-	" <TAB>: completion.
-	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-	" Close popup by <Space>.
-	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-	" AutoComplPop like behavior.
-	"let g:neocomplete#enable_auto_select = 1
-
-	" Shell like behavior(not recommended).
-	"set completeopt+=longest
-	"let g:neocomplete#enable_auto_select = 1
-	"let g:neocomplete#disable_auto_complete = 1
-	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-	" Enable omni completion.
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-	" Enable heavy omni completion.
-	if !exists('g:neocomplete#sources#omni#input_patterns')
-	  let g:neocomplete#sources#omni#input_patterns = {}
-	endif
-	"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-	"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-	"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-	" For perlomni.vim setting.
-	" https://github.com/c9s/perlomni.vim
-	let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-endif
-
 " COLOR SCHEME
 
-color molokai
-colorscheme molokai
+color hybrid
+colorscheme hybrid
 

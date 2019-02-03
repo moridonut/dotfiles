@@ -3,3 +3,7 @@
 !./vimfiles/bundle/neobundle.vim
 
 
+# dein directory
+./vimfiles/dein/*
+!./vimfiles/dein/*.toml
+!./vimfiles/dein/repos/github.com/Shougo/dein.vim

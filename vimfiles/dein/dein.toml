@@ -1,0 +1,44 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+  set background=dark
+  " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+  " 但し Colorscheme イベントの発生が抑制されないよう nented を付ける。
+  au MyAutoCmd VimEnter * nested colorscheme industry
+'''
+
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'Shougo/vimproc'
+
+[[plugins]]
+repo = 'scrooloose/syntastic' 
+
+[[plugins]] # auto end
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+# Colored indent
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+
+
+[[plugins]]
+repo = 'osyo-manga/vim-over'
+
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+
