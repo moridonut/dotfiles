@@ -54,6 +54,12 @@ set ruler " Show ruler on the bottom right
 " :vimgrep to show quick fix window automatically
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Cursor shape
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
 
 "---------------------------------------------------------------------------
 " Neobundle settings

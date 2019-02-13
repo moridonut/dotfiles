@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 24-Oct-2018.
+" Last Change: 03-Feb-2019.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -70,7 +70,7 @@ endif
 "
 if has('win32')
   " Windows用
-  set guifont=MS_Gothic:h10:cSHIFTJIS
+  set guifont=Myrica_M:h11:cSHIFTJIS:qDRAFT
   "set guifont=MS_Mincho:h12:cSHIFTJIS
   " 行間隔の設定
   set linespace=1
