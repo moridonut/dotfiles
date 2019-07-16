@@ -120,16 +120,16 @@ filetype plugin indent on       " restore filetype
 " Key assignment
 
 " .vimrc settings
-nnoremap ,vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> 
-nnoremap ,gvim :vsplit<cr><C-w>l:e! ~/.gvimrc<cr> 
-nnoremap ,vr :source ~/.vimrc<cr>
+nnoremap 'vim :vsplit<cr><C-w>l:e! ~/.vimrc<cr> 
+nnoremap 'gvim :vsplit<cr><C-w>l:e! ~/.gvimrc<cr> 
+nnoremap 'vr :source ~/.vimrc<cr>
 
 "---------------------------------------------------------------------------
 " Color and Formatting changes
 
 " Reform XML
-nnoremap ,xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>
-nnoremap ,sql :set filetype=sql<CR>
+nnoremap 'xml :%s/></>\r</g<CR>:filetype indent on<CR>:setf xml<CR>:normal gg=G<CR>
+nnoremap 'sql :set filetype=sql<CR>
 " Stop highlight search result
 " nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
 nnoremap <Esc><Esc> :noh<CR>
@@ -142,7 +142,7 @@ nnoremap <silent> ,lf :e<space>++ff=unix<CR>:%s/<C-v><C-m>//g<CR>
 
 "---------------------------------------------------------------------------
 " Plugins
-nnoremap ,tr :NERDTree<CR>
+nnoremap 'tr :NERDTree<CR>
 
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
@@ -159,44 +159,44 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 " nnoremap s <Nop>
 
 " Active window changes
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
+" nnoremap sj <C-w>j
+" nnoremap sk <C-w>k
+" nnoremap sl <C-w>l
+" nnoremap sh <C-w>h
 " -----
 " Window place swap
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-nnoremap sn gt
-nnoremap sp gT
+" nnoremap sJ <C-w>J
+" nnoremap sK <C-w>K
+" nnoremap sL <C-w>L
+" nnoremap sH <C-w>H
+" nnoremap sn gt
+" nnoremap sp gT
 " rotate
-nnoremap sr <C-w>r
+" nnoremap sr <C-w>r
 
 " -----
 " Window size changes
 " to the same size
-nnoremap s= <C-w>=
-nnoremap sw <C-w>w
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>
-nnoremap sN :<C-u>bn<CR>
-nnoremap sP :<C-u>bp<CR>
-nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
-nnoremap sQ :<C-u>bd<CR>
-nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
+" nnoremap s= <C-w>=
+" nnoremap sw <C-w>w
+" nnoremap so <C-w>_<C-w>|
+" nnoremap sO <C-w>
+" nnoremap sN :<C-u>bn<CR>
+" nnoremap sP :<C-u>bp<CR>
+" nnoremap st :<C-u>tabnew<CR>
+" nnoremap sT :<C-u>Unite tab<CR>
+" nnoremap ss :<C-u>sp<CR>
+" nnoremap sv :<C-u>vs<CR>
+" nnoremap sq :<C-u>q<CR>
+" nnoremap sQ :<C-u>bd<CR>
+" nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
+" nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 
 " Destroy x and s delete register
 nnoremap x "_x
 xnoremap x "_x
-nnoremap s "_s
-xnoremap s "_s
+" nnoremap s "_s
+" xnoremap s "_s
 
 " Quickly move in Quickfix
 nnoremap q[ :cprevious<CR>
@@ -208,7 +208,7 @@ nnoremap Q] :<C-u>clast<CR>
 xnoremap <expr> p 'pgv"'.v:register.'y`>'
 
 " Pick word on cursor for replacement
-nnoremap sub :OverCommandLine<CR>%s/
+nnoremap 'sub :OverCommandLine<CR>%s/
 nnoremap <expr> c* ':OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>'
 vnoremap <expr> c* ':OverCommandLine<CR>s//g<Left><Left>'
 " To check later.
