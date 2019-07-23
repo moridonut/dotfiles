@@ -103,6 +103,9 @@ NeoBundle 'itchyny/lightline.vim'
 " Colorscheme
 NeoBundle 'tomasr/molokai'
 
+" Comment out
+NeoBundle 'tpope/vim-commentary'
+
 call neobundle#end()
 
 
@@ -144,12 +147,12 @@ nnoremap <silent> ,lf :e<space>++ff=unix<CR>:%s/<C-v><C-m>//g<CR>
 " Plugins
 nnoremap 'tr :NERDTree<CR>
 
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,ud :<C-u>Unite file<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> 'uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> 'ub :<C-u>Unite buffer<CR>
+nnoremap <silent> 'ud :<C-u>Unite file<CR>
+nnoremap <silent> 'uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> 'ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> 'uu :<C-u>Unite file_mru buffer<CR>
 
 " nnoremap <C-e> :!ruby % "Run ruby
 
