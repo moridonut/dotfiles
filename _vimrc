@@ -13,12 +13,15 @@ syntax on  " highlight syntax
 set t_Co=256
 
 " Swap file directory
-:set directory=~/Documents/vimfiles/tmp
-:set backupdir=~/Documents/vimfiles/tmp
+set directory=~/Documents/vimfiles/tmp
+set backupdir=~/Documents/vimfiles/tmp
 
 " Change current directory per the current buffer file.
 set autochdir
 
+
+" Save more ex command history
+set history=200
 "---------------------------------------------------------------------------
 " Invisible Characters
 set list
@@ -102,6 +105,7 @@ NeoBundle 'itchyny/lightline.vim'
 
 " Colorscheme
 NeoBundle 'tomasr/molokai'
+NeoBundle 'altercation/vim-colors-solarized'
 
 " Comment out
 NeoBundle 'tpope/vim-commentary'
@@ -318,6 +322,6 @@ endif
 
 " COLOR SCHEME
 
-color molokai
-colorscheme molokai
+color solarized
+colorscheme solarized
 
