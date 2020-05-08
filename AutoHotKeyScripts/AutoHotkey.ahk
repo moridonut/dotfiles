@@ -48,6 +48,7 @@ $<!<#F15::Send, {Blind}{End}
 <!<^F14::Send, {Blind}{Insert}
 +<!<^F14::Send {Shift}{Insert}
 
+
 ; Mouse Fn1 This is to avoid a bug that ELECOM driver keeps the buttons pressed down.
 <!<+Up:: Send !+{Right}
 
@@ -77,19 +78,38 @@ PrintScreen::
 	}
 return
 
-; Toggle VPN
-ScrollLock::
+
+
+
+; Toggle VPN with blinking ScrollLock light on my keyboard
+
+count := 0
+sc160::
+	SetFormat, Float, 0.0
 	SetWorkingDir, C:\Program Files\OpenVPN\config
-	if ( GetKeyState("ScrollLock", "T") ) {
+	if ( Mod(count,2) = 1 ) {
 		Run C:\Program Files\OpenVPN\bin\openvpn-gui.exe --command disconnect_all
-		Sleep, 1000
+		Send, {ScrollLock}
+		Sleep, 100
+		Send, {ScrollLock}
+		Sleep, 100
+		Send, {ScrollLock}
+		Sleep, 100
 		Send, {ScrollLock}
 	} else {
 		Run C:\Program Files\OpenVPN\bin\openvpn-gui.exe --connect "SyncronVPN - AllTraffic.ovpn"
+		Send, {ScrollLock}
 		Sleep, 1700
-		Send, {Tab}^!+z
+		Send, {Tab}^!+z ; Paste OTP using WinAuth shortcut key
 		Sleep, 500
-		Send, {Enter}{ScrollLock}
+		Send, {Enter}
+		Sleep, 1000
+		Send, {ScrollLock}
+
+		
 	}
+	count += 1
 return
+
+
 
