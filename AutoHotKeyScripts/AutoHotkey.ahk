@@ -34,7 +34,17 @@ sc159 & F12:: Send, {Volume_Up}
 
 
 ; Google translate from clipboard
-sc159 & T::Run,https://translate.google.co.jp/#en/ja/%CLIPBOARD%
+sc159 & T::
+	en_text := LC_UriEncode(CLIPBOARD)
+	Keywait, T, U
+	Keywait, T, D T0.3
+	if (ErrorLevel) {
+		en_text := StrReplace(en_text, "%2F", "%5C%2F")
+		Run,https://www.deepl.com/translator#en/ja/%en_text% ; DeepL Translator if T is single-pressed
+	} else {
+		Run,https://translate.google.co.jp/#en/ja/%en_text% ; Google Translator if T is double-pressed
+	}
+Return
 
 ; hp notebook useless keys
 ; Share Screen key
@@ -112,4 +122,11 @@ sc160::
 return
 
 
-
+; ------------- Methods --------------
+; Modified by GeekDude from http://goo.gl/0a0iJq
+LC_UriEncode(Uri, RE="[0-9A-Za-z]") {
+	VarSetCapacity(Var, StrPut(Uri, "UTF-8"), 0), StrPut(Uri, &Var, "UTF-8")
+	While Code := NumGet(Var, A_Index - 1, "UChar")
+		Res .= (Chr:=Chr(Code)) ~= RE ? Chr : Format("%{:02X}", Code)
+	Return, Res
+}
