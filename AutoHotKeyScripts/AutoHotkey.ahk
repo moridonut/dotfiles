@@ -111,7 +111,7 @@ sc160::
 		Send, {ScrollLock}
 		Sleep, 1700
 		Send, {Tab}^!+z ; Paste OTP using WinAuth shortcut key
-		Sleep, 500
+		Sleep, 700
 		Send, {Enter}
 		Sleep, 1000
 		Send, {ScrollLock}
