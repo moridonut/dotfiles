@@ -115,10 +115,12 @@ sc160::
 		Send, {Enter}
 		Sleep, 1000
 		Send, {ScrollLock}
-
 		
 	}
 	count += 1
+	if GetKeyState("ScrollLock", "T")
+		Send, {ScrollLock} ; Send ScrollLock once again in case it is accidentally on
+		
 return
 
 
