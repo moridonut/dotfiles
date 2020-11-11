@@ -33,6 +33,11 @@ sc159 & F11:: Send, {Volume_Down}
 sc159 & F12:: Send, {Volume_Up}
 
 
+;Tilt scroll
++WheelDown:: Send, {WheelRight}
++WheelUp:: Send, {WheelLeft}
+
+
 ; Google translate from clipboard
 sc159 & T::
 	en_text := LC_UriEncode(CLIPBOARD)
@@ -92,6 +97,7 @@ return
 
 
 ; Toggle VPN with blinking ScrollLock light on my keyboard
+; NIZ Keyboard
 
 count := 0
 sc160::
@@ -109,7 +115,7 @@ sc160::
 	} else {
 		Run C:\Program Files\OpenVPN\bin\openvpn-gui.exe --connect "SyncronVPN - AllTraffic.ovpn"
 		Send, {ScrollLock}
-		Sleep, 1700
+		Sleep, 1800
 		Send, {Tab}^!+z ; Paste OTP using WinAuth shortcut key
 		Sleep, 700
 		Send, {Enter}
@@ -123,6 +129,36 @@ sc160::
 		
 return
 
+; REALFORCE
+count := 0
++sc160::
+	SetFormat, Float, 0.0
+	SetWorkingDir, C:\Program Files\OpenVPN\config
+	if ( Mod(count,2) = 1 ) {
+		Run C:\Program Files\OpenVPN\bin\openvpn-gui.exe --command disconnect_all
+		Send, {NumLock}
+		Sleep, 100
+		Send, {NumLock}
+		Sleep, 100
+		Send, {NumLock}
+		Sleep, 100
+		Send, {NumLock}
+	} else {
+		Run C:\Program Files\OpenVPN\bin\openvpn-gui.exe --connect "SyncronVPN - AllTraffic.ovpn"
+		Send, {NumLock}
+		Sleep, 1800
+		Send, {Tab}^!+z ; Paste OTP using WinAuth shortcut key
+		Sleep, 700
+		Send, {Enter}
+		Sleep, 1000
+		Send, {NumLock}
+		
+	}
+	count += 1
+	if GetKeyState("NumLock", "T")
+		Send, {NumLock} ; Send NumLock once again in case it is accidentally on
+		
+return
 
 ; ------------- Methods --------------
 ; Modified by GeekDude from http://goo.gl/0a0iJq
