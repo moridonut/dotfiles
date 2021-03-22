@@ -24,6 +24,10 @@ sc159 & ,:: Send, {Blind}{XButton1}
 sc159 & .:: Send, {Blind}{XButton2}
 sc159 & \:: Send, {AppsKey}
 
+
+sc159 & n:: Send, ^#{Left}
+sc159 & m:: Send, ^#{Right}
+
 ;Multimedia
 sc159 & F7:: Send, {Media_Prev}
 sc159 & F8:: Send, {Media_Play_Pause}
@@ -36,6 +40,8 @@ sc159 & F12:: Send, {Volume_Up}
 ;Tilt scroll
 +WheelDown:: Send, {WheelRight}
 +WheelUp:: Send, {WheelLeft}
+RButton & WheelDown:: Send, {WheelRight}
+RButton & WheelUp:: Send, {WheelLeft}
 
 
 ; Google translate from clipboard
